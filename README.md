@@ -93,12 +93,10 @@ while(true) 1::second => now;
 ```
 
 ## Compilation
->>>>>>> origin/main
 
 ### macOS
 ```bash
 make osx
-<<<<<<< HEAD
 ```
 
 ### Linux
@@ -143,7 +141,4 @@ sudo make install
 make linux
 sudo make install
 ```
-=======
-# Chuck-Convolver
->>>>>>> 779fe3a7f942c29891b4a6f5afbf7bfbba33e473
->>>>>>> origin/main
+
