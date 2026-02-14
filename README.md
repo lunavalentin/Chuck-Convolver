@@ -58,6 +58,9 @@ Sets the dry signal trim in Decibels (dB).
   - `db`: Gain in dB (e.g., -3.0). 
 - **Returns**: The new dry dB value.
 
+###  `int normalize(int toggle)`: 
+Enables (1) or disables (0) automatic peak normalization of the IR upon loading. Default is enabled (1).
+
 ## Usage Example
 
 ```chuck
