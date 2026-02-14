@@ -18,7 +18,10 @@ CK_DLL_MFUN(convolver_mix);
 CK_DLL_MFUN(convolver_wet_db);
 CK_DLL_MFUN(convolver_dry_db);
 CK_DLL_MFUN(convolver_blockSize);
+<<<<<<< HEAD
 CK_DLL_MFUN(convolver_normalize);
+=======
+>>>>>>> origin/main
 
 t_CKINT convolver_data_offset = 0;
 
@@ -44,10 +47,15 @@ private:
     float _dry_linear;
     size_t _userBlockSize;
 
+<<<<<<< HEAD
     bool _normalize;
 
 public:
     ConvolVer(float fs) : _SR(fs), _idx(0), _gain(1.0f), _mix(1.0f), _wet_db(0.0f), _dry_db(0.0f), _userBlockSize(1024), _normalize(true)
+=======
+public:
+    ConvolVer(float fs) : _SR(fs), _idx(0), _gain(1.0f), _mix(1.0f), _wet_db(0.0f), _dry_db(0.0f), _userBlockSize(1024)
+>>>>>>> origin/main
     {
         updateLinearGains();
         _blocksize = _userBlockSize;
@@ -66,6 +74,7 @@ public:
         
         // Safety: Peak Normalize to 0.3 (Conservative default)
         // Convolution adds a lot of energy. 
+<<<<<<< HEAD
         if (_normalize) {
             float max_val = 0.0f;
             for (float f : samples) {
@@ -77,6 +86,17 @@ public:
                 // Apply scale
                 for (size_t i=0; i<samples.size(); ++i) samples[i] *= scale;
             }
+=======
+        float max_val = 0.0f;
+        for (float f : samples) {
+            if (std::abs(f) > max_val) max_val = std::abs(f);
+        }
+
+        if (max_val > 0.000001f) {
+            float scale = 0.5f / max_val; 
+            // Apply scale
+            for (size_t i=0; i<samples.size(); ++i) samples[i] *= scale;
+>>>>>>> origin/main
         }
 
         _convolver.reset();
@@ -136,9 +156,12 @@ public:
     }
     int getBlockSize() { return (int)_userBlockSize; }
 
+<<<<<<< HEAD
     void setNormalize(int n) { _normalize = (n != 0); }
     int getNormalize() { return _normalize ? 1 : 0; }
 
+=======
+>>>>>>> origin/main
     SAMPLE tick(SAMPLE in)
     {
         _input_buffer[_idx] = in;
@@ -183,9 +206,12 @@ CK_DLL_QUERY(ConvolVer)
     QUERY->add_mfun(QUERY, convolver_blockSize, "int", "blockSize");
     QUERY->add_arg(QUERY, "int", "val");
 
+<<<<<<< HEAD
     QUERY->add_mfun(QUERY, convolver_normalize, "int", "normalize");
     QUERY->add_arg(QUERY, "int", "toggle");
 
+=======
+>>>>>>> origin/main
     convolver_data_offset = QUERY->add_mvar(QUERY, "int", "@c_data", false);
     QUERY->end_class(QUERY);
     return TRUE;
@@ -263,6 +289,7 @@ CK_DLL_MFUN(convolver_blockSize)
     int v = GET_NEXT_INT(ARGS);
     RETURN->v_int = obj->setBlockSize(v);
 }
+<<<<<<< HEAD
 
 CK_DLL_MFUN(convolver_normalize)
 {
@@ -271,3 +298,5 @@ CK_DLL_MFUN(convolver_normalize)
     obj->setNormalize(v);
     RETURN->v_int = v;
 }
+=======
+>>>>>>> origin/main
