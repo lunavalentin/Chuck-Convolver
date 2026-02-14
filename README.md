@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # ConvolVer
 
 A simple, efficient convolution Chugin for ChucK, based on `FFTConvolver`.
